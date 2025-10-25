@@ -1,31 +1,23 @@
-let counter = 1;
+ctr=1
+function deleteTodo(index){
+  const element=document.getElementById(index);
+  if (element){
+    element.parentNode.removeChild(element);
+  }
+}
+function addTodo(){
+  const inputEl= document.getElementById("input");
+  const value= inputEl.value.trim();
 
-function addTodo() {
-  const inputEle = document.querySelector("input");
-  const value = inputEle.value;
-
-  if (value.trim() === '') {
-    alert('Please enter a todo item.');
+  if (value === "") {
+    alert("Please enter a todo before adding!");
     return;
   }
+  const newDivEl=document.createElement("div");
+  newDivEl.setAttribute("id",ctr );
 
-  const newDivEle = document.createElement("div");
-  newDivEle.setAttribute("id", "todo-" + counter);
+  newDivEl.innerHTML=`<div>${ctr}.${value}</div><button onclick="deleteTodo(${ctr})">delete</button>`;
+  document.getElementById("todos").appendChild(newDivEl);
+  ctr++;
   
-  newDivEle.innerHTML =
-  "<div>" +
-  value +
-  "</div><button onclick='deleteTodo(" +
-  counter +
-  ")'>Delete</button>";
-  
-  document.querySelector("body").appendChild(newDivEle);
-  counter++;
-}
-
-function deleteTodo(index) {
-  const element = document.getElementById("todo-" + index);
-  const parentElement = element.parentNode;
-
-  parentElement.removeChild(element);
 }
